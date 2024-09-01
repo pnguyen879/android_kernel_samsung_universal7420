@@ -1426,7 +1426,6 @@ static struct buffer_head * ext4_dx_find_entry(struct inode *dir, const struct q
 		bh = ext4_read_dirblock(dir, block, DIRENT);
 		if (IS_ERR(bh))
 			goto errout;
-		}
 #ifdef CONFIG_SDCARD_FS_CI_SEARCH
 		retval = search_dirblock(bh, dir, d_name,
 					 block << EXT4_BLOCK_SIZE_BITS(sb),
