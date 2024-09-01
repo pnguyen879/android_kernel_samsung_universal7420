@@ -1211,8 +1211,6 @@ static int ext4_da_reserve_space(struct inode *inode, ext4_lblk_t lblock)
 		if (ext4_claim_free_clusters(sbi, 1,
 			ext4_test_inode_flag(inode, EXT4_INODE_CORE_FILE) ?
 			EXT4_MB_USE_EXTRA_ROOT_BLOCKS : 0)) {
-		ei->i_da_metadata_calc_len = save_len;
-		ei->i_da_metadata_calc_last_lblock = save_last_lblock;
 		spin_unlock(&ei->i_block_reservation_lock);
 		dquot_release_reservation_block(inode, EXT4_C2B(sbi, 1));
 		return -ENOSPC;
