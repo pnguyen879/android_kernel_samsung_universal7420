@@ -1067,7 +1067,7 @@ static void change_pageblock_range(struct page *pageblock_page,
 static void try_to_steal_freepages(struct zone *zone, struct page *page,
 				  int start_type, int fallback_type)
 {
-	int current_order = page_order(page);
+	unsigned int current_order = page_order(page);
 
 	/* Take ownership for orders >= pageblock_order */
 	if (current_order >= pageblock_order) {
@@ -1078,6 +1078,7 @@ static void try_to_steal_freepages(struct zone *zone, struct page *page,
 	if (current_order >= pageblock_order / 2 ||
 	    start_type == MIGRATE_RECLAIMABLE ||
 	    start_type == MIGRATE_UNMOVABLE ||
+	    start_type == MIGRATE_MOVABLE ||
 	    page_group_by_mobility_disabled) {
 		int pages;
 
@@ -1085,6 +1086,7 @@ static void try_to_steal_freepages(struct zone *zone, struct page *page,
 
 		/* Claim the whole block if over half of it is free */
 		if (pages >= (1 << (pageblock_order-1)) ||
+				start_type == MIGRATE_MOVABLE ||
 				page_group_by_mobility_disabled)
 			set_pageblock_migratetype(page, start_type);
 	}
