@@ -21,7 +21,6 @@
 #include <net/net_ratelimit.h>
 
 static int zero = 0;
-static int one = 1;
 static int ushort_max = USHRT_MAX;
 static int one __maybe_unused = 1;
 static int two __maybe_unused = 2;
